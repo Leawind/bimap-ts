@@ -1,4 +1,4 @@
-# BiMap TypeScript Library
+# BiMap
 
 A TypeScript library provides a bi-directional map (BiMap) implementation, allowing efficient lookups by both keys and values. This library ensures that both keys and values are unique, maintaining an inverse mapping from values to keys.
 
