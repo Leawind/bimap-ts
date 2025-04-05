@@ -124,23 +124,19 @@ export class BiMap<K, V> {
 	 *
 	 * @template U - the returned value will be casted to this type
 	 * @returns Returns the value associated with the specified key
-	 * @throws {BiMapNoSuchKeyError} Error is throwed if no value is associated with the specified key
 	 */
-	public getValue<U extends V = V>(key: K): U {
-		this.assertHasKey(key);
-		return this.key2value.get(key) as U;
+	public getValue<U extends V = V>(key: K): U | undefined {
+		return this.key2value.get(key) as U | undefined;
 	}
 
 	/**
 	 * Returns a key from the BiMap object.
 	 *
 	 * @template U - the returned value will be casted to this type
-	 * @returns Returns the key associated with the specified key
-	 * @throws {BiMapNoSuchValueError} Error is throwed if no key is associated with the specified value
+	 * @returns Returns the key associated with the specified value
 	 */
-	public getKey<U extends K = K>(value: V): U {
-		this.assertHasValue(value);
-		return this.value2key.get(value) as U;
+	public getKey<U extends K = K>(value: V): U | undefined {
+		return this.value2key.get(value) as U | undefined;
 	}
 
 	/**
@@ -179,8 +175,6 @@ export class BiMap<K, V> {
 	}
 
 	/**
-	 * TODO
-	 *
 	 * Adds a new pair of [key, value] to the BiMap.
 	 *
 	 * If any pair with the same key or value already exists, they will be removed.

@@ -1,9 +1,7 @@
-import { assert, assertThrows } from '@std/assert';
+import { assert, assertStrictEquals, assertThrows } from '@std/assert';
 import {
 	BiMap,
 	BiMapKeyConflictError,
-	BiMapNoSuchKeyError,
-	BiMapNoSuchValueError,
 	BiMapValueConflictError,
 } from '@/index.ts';
 
@@ -43,6 +41,9 @@ Deno.test('BiMap: basic', () => {
 		assert(!bimap.hasKey('two'));
 		assert(!bimap.hasValue(2));
 	}
+
+	assertStrictEquals(BiMap.from({ one: 1 }).getKey(2), undefined);
+	assertStrictEquals(BiMap.from({ one: 1 }).getValue('two'), undefined);
 });
 
 Deno.test('BiMap: setAll', () => {
@@ -103,13 +104,5 @@ Deno.test('BiMap: error', () => {
 	assertThrows(
 		() => BiMap.from({ one: 1 }).add('two', 1),
 		BiMapValueConflictError,
-	);
-	assertThrows(
-		() => BiMap.from({ one: 1 }).getKey(2),
-		BiMapNoSuchValueError,
-	);
-	assertThrows(
-		() => BiMap.from({ one: 1 }).getValue('two'),
-		BiMapNoSuchKeyError,
 	);
 });
